@@ -1,0 +1,59 @@
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\bin\Debug\net6.0\appsettings.json
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\bin\Debug\net6.0\API-Exemplo.exe
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\bin\Debug\net6.0\API-Exemplo.deps.json
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\bin\Debug\net6.0\API-Exemplo.runtimeconfig.json
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\bin\Debug\net6.0\API-Exemplo.dll
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\bin\Debug\net6.0\API-Exemplo.pdb
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.csproj.AssemblyReference.cache
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.AssemblyInfoInputs.cache
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.AssemblyInfo.cs
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.csproj.CoreCompileInputs.cache
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\scopedcss\bundle\API-Exemplo.styles.css
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.csproj.CopyComplete
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.dll
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\refint\API-Exemplo.dll
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.pdb
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.genruntimeconfig.cache
+C:\Users\dti Digital\source\repos\API-Exemplo\API-Exemplo\obj\Debug\net6.0\ref\API-Exemplo.dll
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.dll
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\refint\API-Exemplo.dll
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.pdb
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\bin\Debug\net6.0\appsettings.json
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\bin\Debug\net6.0\API-Exemplo.exe
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\bin\Debug\net6.0\API-Exemplo.deps.json
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\bin\Debug\net6.0\API-Exemplo.runtimeconfig.json
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\bin\Debug\net6.0\API-Exemplo.dll
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\bin\Debug\net6.0\API-Exemplo.pdb
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.csproj.AssemblyReference.cache
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.AssemblyInfoInputs.cache
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.AssemblyInfo.cs
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.csproj.CoreCompileInputs.cache
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\staticwebassets\msbuild.API-Exemplo.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\staticwebassets\msbuild.build.API-Exemplo.props
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.API-Exemplo.props
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.API-Exemplo.props
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\scopedcss\bundle\API-Exemplo.styles.css
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.csproj.CopyComplete
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.genruntimeconfig.cache
+C:\Users\dtiDigital\Documents\API-Exemplo\API-Exemplo\API-Exemplo\obj\Debug\net6.0\ref\API-Exemplo.dll
