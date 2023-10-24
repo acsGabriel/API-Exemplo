@@ -1,7 +1,8 @@
 ﻿namespace API_Exemplo
 {
+    //CLASSE SIMULAÇÃO DE UM BANCO DE DADOS
     public class BancoDeDados
     {
-        public static List<string> Alunos = new List<string> {"Adolfo", "Arthur", "Bruno", "Fagner", "Gabriel", "Philemon", "Thiago"};
+        public static List<Aluno> alunos = new List<Aluno>(); //ARMAZENAMENTO LOCAL DOS OBJETOS ALUNOS
     }
 }

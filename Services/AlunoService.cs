@@ -2,105 +2,57 @@
 
 namespace API_Exemplo.Services
 {
+    //FUNCIONALIDADES DO PROGRAMA QUE ENVOLVE OS ALUNOS
     public class AlunoService
     {
         public AlunoService() { }
 
+        //LINQ IMPLEMENTADO - Logica por tras da atualização dos dados de um Aluno
         public void putAluno(Aluno aluno)
         {
-            for (int i = 0; i < Aluno.alunos.Count; i++)
-            {
-                if (Aluno.alunos[i].nome == aluno.nome)
-                {
-                    Aluno.alunos[i] = aluno;
-                }
-            }
+            //Query que seleciona o aluno que eu desejo atualizar e altera seus atributos
+            BancoDeDados.alunos = BancoDeDados.alunos.Select(a=> { if(a.nome == aluno.nome) { a.curso = aluno.curso; a.periodo = aluno.periodo; } return a; }).ToList();
         }
 
+        //LINQ IMPLEMENTADO - Logica por tras da remoção de um Aluno 
         public void deleteAluno(string name)
         {
-            for (int i = 0; i < Aluno.alunos.Count; i++)
-            {
-                if (Aluno.alunos[i].nome == name)
-                {
-                    Aluno.alunos.Remove(Aluno.alunos[i]);
-                }
-            }
+            //Query que cria uma nova Lista com todos os elementos menos aquele a ser removido
+            BancoDeDados.alunos = BancoDeDados.alunos.Where(aluno => aluno.nome != name).ToList(); 
         }
 
+        //LINQ IMPLEMENTADO - Logica por tras da atualização parcial de um Aluno
         public void patchAluno(Aluno aluno)
         {
-            for (int i = 0; i < Aluno.alunos.Count; i++)
-            {
-                if (Aluno.alunos[i].nome == aluno.nome)
-                {
-                    if (Aluno.alunos[i].curso!= aluno.curso && aluno.periodo == 0)
-                    {
-                        Aluno.alunos[i].curso = aluno.curso;
-                    }
-                    else if (Aluno.alunos[i].periodo != aluno.periodo && aluno.curso == "string")
-                    {
-                        Aluno.alunos[i].periodo = aluno.periodo;
-                    }
-                }
-            }
+            //Query seleciona o aluno a ser atualizado, encontra o atributo que esta diferente e altera no Aluno original
+            BancoDeDados.alunos = BancoDeDados.alunos.Select(a => { if(a.nome == aluno.nome) { if(a.curso != aluno.curso) { a.curso = aluno.curso; return a; } else { a.periodo = aluno.periodo; return a; }} return a; }).ToList();
         }
 
-        private void swap(Aluno[] sort , int menor , int i)
+        //LINQ IMPLEMENTADO - Ordenação dos Alunos por meio do nome
+        public List<Aluno> sortByName() 
         {
-            Aluno temp = sort[i];
-            sort[i] = sort[menor];
-            sort[menor] = temp;
+            //Query que usa o comando OrderBy para ordenar a lista de acordo com o nome
+            return BancoDeDados.alunos.OrderBy(aluno => aluno.nome).ToList(); 
         }
 
-        public  List<Aluno> sortByName(List<Aluno> alunos) 
+        //LINQ IMPLEMENTADO - Logica por tras de selecionar todos os Alunos de um mesmo curso
+        public List<Aluno> GetSelectedAlunos(string curso)
         {
-            Aluno[] sort= alunos.ToArray();
-
-            for(int i = 0; i < sort.Length - 1 ; i++)
-            {
-                int menor = i;
-                for (int j = i + 1 ; j < sort.Length ; j++)
-                {
-                    if (sort[j].nome.CompareTo(sort[menor].nome) < 0)
-                        menor = j;
-                }
-                swap(sort , menor , i);
-            }
-
-            alunos = sort.ToList();
-
-            return alunos;
+            //Retorna a lista filtrada com os Alunos que cursam o curso passado no parâmetro
+            //ToLower() utilizado para comparar as strings tratando possiveis erros de digitação
+            return BancoDeDados.alunos.Where(aluno => aluno.curso.ToLower() == curso.ToLower()).ToList();
         }
 
-        public  Aluno graduate(List<Aluno> alunos)
+        //LINQ IMPLEMENTADO - Lógica por tras de mostrar todos os alunos prestes a formar de dois cursos diferentes
+        public List<Aluno> graduate(string curso1 , string curso2)
         {
-            Aluno resp = alunos[0];
-
-            for(int i = 0; i < alunos.Count; i++)
-            {
-                if (alunos[i].periodo > resp.periodo)
-                {
-                    resp = alunos[i];
-                }
-
-            }
-
-            return resp;
+            //Query para selecionar os alunos formandos do curso 1
+            List<Aluno> grad1 = BancoDeDados.alunos.Where(aluno => aluno.curso == curso1).Where(aluno => aluno.periodo > 7).ToList();
+            //Query para selecionar os formandos do curso 2, concatenar com os formandos do curso 1 e ordenar por nome.
+            return BancoDeDados.alunos.Where(aluno => aluno.curso == curso2).Where(aluno => aluno.periodo > 9).Concat(grad1).OrderBy(aluno => aluno.nome).ToList();
         }
 
-        public List<Aluno> getSelectedAlunos(string curso)
-        {
-            List<Aluno> alunosSelected = new List<Aluno>();
 
-            for (int i = 0; i < Aluno.alunos.Count; i++)
-            {
-                if (Aluno.alunos[i].curso == curso)
-                {
-                    alunosSelected.Add(Aluno.alunos[i]);
-                }
-            }
-            return alunosSelected;
-        }
+        
     }
 }

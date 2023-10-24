@@ -7,7 +7,7 @@ namespace API_Exemplo.Controllers
     [Route("[Controller]")] //FAZ A CONEXÃO COM O SERVIDOR WEB
     public class AlunosController : ControllerBase
     {
-        AlunoService alunoService = new AlunoService();
+        AlunoService alunoService = new AlunoService(); //CRIAÇÃO DE INSTÂNCIA PARA CLASSE DOS SERVIÇOS
 
         private readonly ILogger<AlunosController> _logger;
 
@@ -19,25 +19,25 @@ namespace API_Exemplo.Controllers
         [HttpGet(Name = "GetAlunos")] //FAZ A REQUISIÇÃO HTTP PARA MOSTRAR OS ALUNOS
         public List<Aluno> Get()
         {
-            return alunoService.sortByName(Aluno.alunos); //Mostra a lista estatica com as strings que foram criadas a partir dos atributos de um objeto
+            return alunoService.sortByName(); //Mostra a lista estatica com as strings que foram criadas a partir dos atributos de um objeto
         }
 
-        [HttpPost(Name = "PostAlunos")] //Adiciona um novo aluno 
+        [HttpPost(Name = "PostAlunos")] //ADICIONA UM NOVO ALUNO
         public bool Post([FromBody] Aluno aluno)
         {
-            Aluno.alunos.Add(aluno); //Adiciona o aluno à lista de alunos
+            BancoDeDados.alunos.Add(aluno); //Adiciona o aluno à lista de alunos
             return true;
         }
 
 
-        [HttpPut(Name = "PutAlunos")] //Atualiza os dados de um novo aluno
+        [HttpPut(Name = "PutAlunos")] //ATUALIZA TODOS OS DADOS DE UM ALUNO 
         public bool Put([FromBody] Aluno aluno)
         {
             alunoService.putAluno(aluno);
             return true;
         }
 
-        [HttpDelete(Name = "DeleteAlunos")] //Remove um aluno
+        [HttpDelete(Name = "DeleteAlunos")] //REMOVE UM ALUNO
         public bool Delete([FromBody] string nome)
         {
             alunoService.deleteAluno(nome);
@@ -45,7 +45,7 @@ namespace API_Exemplo.Controllers
         }
 
 
-        [HttpPatch(Name = "PatchAlunos")]
+        [HttpPatch(Name = "PatchAlunos")] //ATUALIZA UM DADO DO ALUNO
         public bool Patch([FromBody] Aluno aluno)
         {
             alunoService.patchAluno(aluno);
@@ -53,18 +53,18 @@ namespace API_Exemplo.Controllers
         }
 
         
-        [HttpGet]
-        [Route("GetSelectedAlunos")]
+        [HttpGet] //MOSTRA ALUNOS DE UM CURSO ESPECIFICO
+        [Route("GetSelectedAlunos")] 
         public List<Aluno> GetSelectedAlunos(string curso)
         {
-            return alunoService.getSelectedAlunos(curso);
+            return alunoService.GetSelectedAlunos(curso);
         }
 
         [HttpGet]
-        [Route("Graduation")]
-        public Aluno GetGraduatingStudent()
+        [Route("Graduation")] //MOSTRA OS ALUNOS QUE ESTAO PARA SE GRADUAR DE 2 CURSOS SIMULTANEAMENTE
+        public List<Aluno> GetGraduatingStudents(string curso1 , string curso2)
         {
-            return alunoService.graduate(Aluno.alunos);
+            return alunoService.graduate(curso1,curso2);
         }
 
     }
