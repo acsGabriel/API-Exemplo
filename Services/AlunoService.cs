@@ -12,13 +12,17 @@ namespace API_Exemplo.Services
         {
             //Query que seleciona o aluno que eu desejo atualizar e altera seus atributos
             BancoDeDados.alunos = BancoDeDados.alunos.Select(a=> { if(a.nome == aluno.nome) { a.curso = aluno.curso; a.periodo = aluno.periodo; } return a; }).ToList();
+
+            //Usar find 
         }
 
         //LINQ IMPLEMENTADO - Logica por tras da remoção de um Aluno 
         public void deleteAluno(string name)
         {
             //Query que cria uma nova Lista com todos os elementos menos aquele a ser removido
-            BancoDeDados.alunos = BancoDeDados.alunos.Where(aluno => aluno.nome != name).ToList(); 
+            BancoDeDados.alunos = BancoDeDados.alunos.Where(aluno => aluno.nome != name).ToList();
+            
+            //Delete nao precisa de LINQ
         }
 
         //LINQ IMPLEMENTADO - Logica por tras da atualização parcial de um Aluno
@@ -26,6 +30,8 @@ namespace API_Exemplo.Services
         {
             //Query seleciona o aluno a ser atualizado, encontra o atributo que esta diferente e altera no Aluno original
             BancoDeDados.alunos = BancoDeDados.alunos.Select(a => { if(a.nome == aluno.nome) { if(a.curso != aluno.curso) { a.curso = aluno.curso; return a; } else { a.periodo = aluno.periodo; return a; }} return a; }).ToList();
+
+            //Usar find
         }
 
         //LINQ IMPLEMENTADO - Ordenação dos Alunos por meio do nome
@@ -50,7 +56,11 @@ namespace API_Exemplo.Services
             List<Aluno> grad1 = BancoDeDados.alunos.Where(aluno => aluno.curso == curso1).Where(aluno => aluno.periodo > 7).ToList();
             //Query para selecionar os formandos do curso 2, concatenar com os formandos do curso 1 e ordenar por nome.
             return BancoDeDados.alunos.Where(aluno => aluno.curso == curso2).Where(aluno => aluno.periodo > 9).Concat(grad1).OrderBy(aluno => aluno.nome).ToList();
+
+            //Where aceita mais de uma condição
         }
+
+        //Criar método pro first or default e método pro default
 
 
         
