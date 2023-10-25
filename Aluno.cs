@@ -1,4 +1,6 @@
-﻿namespace API_Exemplo
+﻿using System;
+
+namespace API_Exemplo
 {
     //CLASSE DOS ALUNOS
     public class Aluno
@@ -18,6 +20,13 @@
             matricula = matricula + 1;
 
             matricula++;
+        }
+
+        public Aluno()
+        {
+            nome = "";
+            curso = "";
+            periodo = 0;
         }
 
     }

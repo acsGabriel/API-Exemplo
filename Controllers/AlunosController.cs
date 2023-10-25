@@ -19,7 +19,7 @@ namespace API_Exemplo.Controllers
         [HttpGet(Name = "GetAlunos")] //FAZ A REQUISIÇÃO HTTP PARA MOSTRAR OS ALUNOS
         public List<Aluno> Get()
         {
-            return alunoService.sortByName(); //Mostra a lista estatica com as strings que foram criadas a partir dos atributos de um objeto
+            return alunoService.SortByName(); //Mostra a lista estatica com as strings que foram criadas a partir dos atributos de um objeto
         }
 
         [HttpPost(Name = "PostAlunos")] //ADICIONA UM NOVO ALUNO
@@ -33,22 +33,22 @@ namespace API_Exemplo.Controllers
         [HttpPut(Name = "PutAlunos")] //ATUALIZA TODOS OS DADOS DE UM ALUNO 
         public bool Put([FromBody] Aluno aluno)
         {
-            alunoService.putAluno(aluno);
+            alunoService.PutAluno(aluno);
             return true;
         }
 
         [HttpDelete(Name = "DeleteAlunos")] //REMOVE UM ALUNO
         public bool Delete([FromBody] string nome)
         {
-            alunoService.deleteAluno(nome);
+            alunoService.DeleteAluno(nome);
             return true;
         }
 
 
         [HttpPatch(Name = "PatchAlunos")] //ATUALIZA UM DADO DO ALUNO
-        public bool Patch([FromBody] Aluno aluno)
+        public bool Patch([FromBody] Aluno aluno , string atributo)
         {
-            alunoService.patchAluno(aluno);
+            alunoService.PatchAluno(aluno , atributo);
             return true;
         }
 
@@ -64,8 +64,23 @@ namespace API_Exemplo.Controllers
         [Route("Graduation")] //MOSTRA OS ALUNOS QUE ESTAO PARA SE GRADUAR DE 2 CURSOS SIMULTANEAMENTE
         public List<Aluno> GetGraduatingStudents(string curso1 , string curso2)
         {
-            return alunoService.graduate(curso1,curso2);
+            return alunoService.Graduate(curso1,curso2);
         }
+
+        [HttpGet]
+        [Route("StudentNames")] //MOSTRA O NOME DE TODOS OS ALUNOS
+        public List<string> StudentNames()
+        {
+            return alunoService.Names();
+        }
+
+        [HttpGet]
+        [Route("FirstOfClass")] //MOSTRA O PRIMEIRO ALUNO DO CURSO PASSADO COMO PARÂMETRO
+        public Aluno MostFullGraduation(string course)
+        {
+            return alunoService.FirstStudent(course);
+        }
+
 
     }
 }
