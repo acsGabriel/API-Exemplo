@@ -230,11 +230,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dtiDigital\\Documents\\API-Exemplo\\API-Exemplo\\API-Exemplo\\API-Exemplo.csproj",
+      "projectUniqueName": "C:\\Users\\dtiDigital\\Documents\\TREINAMENTO\\API-Exemplo - Copia\\API-Exemplo\\API-Exemplo.csproj",
       "projectName": "API-Exemplo",
-      "projectPath": "C:\\Users\\dtiDigital\\Documents\\API-Exemplo\\API-Exemplo\\API-Exemplo\\API-Exemplo.csproj",
+      "projectPath": "C:\\Users\\dtiDigital\\Documents\\TREINAMENTO\\API-Exemplo - Copia\\API-Exemplo\\API-Exemplo.csproj",
       "packagesPath": "C:\\Users\\dtiDigital\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dtiDigital\\Documents\\API-Exemplo\\API-Exemplo\\API-Exemplo\\obj\\",
+      "outputPath": "C:\\Users\\dtiDigital\\Documents\\TREINAMENTO\\API-Exemplo - Copia\\API-Exemplo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
