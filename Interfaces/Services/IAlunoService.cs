@@ -7,7 +7,6 @@
         public void Delete(string name);
         public void Put(T tipoAluno); //Generico
         public void Patch(T tipoAluno, string atributo);
-        public List<T> GetSelectedAlunos(int ano);
         public List<string> Names();
         
 

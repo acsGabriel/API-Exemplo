@@ -3,17 +3,14 @@
     public class AlunoSuperior : Aluno
     {
         public string curso {  get; set; }
-        public string turno { get; set; }
-        public int periodo {  get; set; }
 
-        public AlunoSuperior(string nome , int idade , string curso ,  string turno , int periodo)
+        public AlunoSuperior(string nome , int idade , string curso ,  string turno , int ano)
         {
             this.nome = nome;
             this.idade = idade;
             this.curso = curso;
             this.turno = turno;
-            this.periodo = periodo;
-            //matricula++;
+            this.ano = ano;
         }
     }
 }

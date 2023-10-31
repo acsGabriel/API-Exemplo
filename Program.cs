@@ -12,9 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Injeção de Dependência
-//builder.Services.AddScoped<IAlunoSuperiorService, AlunoSuperiorService>();
+builder.Services.AddScoped<IAlunoSuperiorService<AlunoSuperior> , AlunoSuperiorService <AlunoSuperior> >();
 builder.Services.AddScoped<IAlunoFundamentalService<AlunoFundamental>, AlunoFundamentalService<AlunoFundamental> >();
-//builder.Services.AddScoped<IAlunoInfantilService, AlunoInfantilService>();
+builder.Services.AddScoped<IAlunoInfantilService<AlunoInfantil>, AlunoInfantilService<AlunoInfantil> >();
 
 var app = builder.Build();
 

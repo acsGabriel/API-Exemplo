@@ -55,6 +55,10 @@ namespace API_Exemplo.Services
             {
                 patch.turno = tipoAluno.turno;
             }
+            else if(atributo == "idade")
+            {
+                patch.idade = tipoAluno.idade;
+            }
         }
 
         public List<T> GetSelectedAlunos(int ano)
