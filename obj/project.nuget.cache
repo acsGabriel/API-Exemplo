@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Cn9oTDpduObPAcIhgcIwxdSmrIeME4X9IbJh7KZkQzhKc/hmBweR/AjHY4GZ6UJwd5butxYX6mYUPcAyGpangw==",
+  "dgSpecHash": "Ege1pxn3XtbhBYsRad6beqwf3qv3ud5mE9+oW6vPCJF85gANoFI9m4AQ37ST6CFsoWuBWUx0T6BU/yGoPVUVTQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dtiDigital\\Documents\\API-Exemplo\\API-Exemplo\\API-Exemplo\\API-Exemplo.csproj",
+  "projectFilePath": "C:\\Users\\dtiDigital\\Documents\\TREINAMENTO\\API-Exemplo\\API-Exemplo\\API-Exemplo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dtiDigital\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\dtiDigital\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

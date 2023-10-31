@@ -7,27 +7,9 @@ namespace API_Exemplo
     {
         //ATRIBUTOS
         public string nome { get; set; }
-        public string curso { get; set; }
-        public int periodo { get; set; }
-        public static int matricula = 0;
-
-        //CONSTRUTOR
-        public Aluno(string nome , string curso , int periodo)
-        {
-            this.nome = nome;
-            this.curso = curso;
-            this.periodo = periodo;
-            matricula = matricula + 1;
-
-            matricula++;
-        }
-
-        public Aluno()
-        {
-            nome = "";
-            curso = "";
-            periodo = 0;
-        }
-
+        public int idade { get; set; }
+        public int ano { get; set; }
+        public string turno { get; set; }
+        //public static int matricula = 1;
     }
 }
