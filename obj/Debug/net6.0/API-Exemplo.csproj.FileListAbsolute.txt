@@ -89,3 +89,4 @@ C:\Users\dtiDigital\Documents\TREINAMENTO\API-Exemplo\API-Exemplo\obj\Debug\net6
 C:\Users\dtiDigital\Documents\TREINAMENTO\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.pdb
 C:\Users\dtiDigital\Documents\TREINAMENTO\API-Exemplo\API-Exemplo\obj\Debug\net6.0\API-Exemplo.genruntimeconfig.cache
 C:\Users\dtiDigital\Documents\TREINAMENTO\API-Exemplo\API-Exemplo\obj\Debug\net6.0\ref\API-Exemplo.dll
+C:\Users\dtiDigital\Documents\TREINAMENTO\API-Exemplo\API-Exemplo\bin\Debug\net6.0\FluentValidation.dll

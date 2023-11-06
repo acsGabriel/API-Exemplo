@@ -1,5 +1,11 @@
-﻿using API_Exemplo.Interfaces.Services;
+﻿using API_Exemplo.Exceções;
+using API_Exemplo.Interfaces.Services;
+using API_Exemplo.Validacoes;
+using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
 
 namespace API_Exemplo.Services
 {
@@ -7,16 +13,32 @@ namespace API_Exemplo.Services
     public class AlunoInfantilService<T> : IAlunoInfantilService<T>
         where T : AlunoInfantil
     {
-        public AlunoInfantilService() { }
+        public IValidator<AlunoInfantil> _alunoInfantilValidator;
+        public AlunoInfantilService(IValidator<AlunoInfantil> alunoInfantilValidator) 
+        {
+            _alunoInfantilValidator = alunoInfantilValidator;
+        }
 
         public List<T> Get()
         {
             return BancoDeDados.alunosInfantil.OrderBy(a => a.nome).Cast<T>().ToList();
         }
 
-        public void Post(T aluno)
+        public bool Post(T aluno) 
         {
-            BancoDeDados.alunosInfantil.Add(aluno);
+            TratamentoExcessao erro = new TratamentoExcessao();
+            var validation = _alunoInfantilValidator.Validate(aluno);
+
+            if(validation.IsValid) 
+            {
+                BancoDeDados.alunosInfantil.Add(aluno);
+            }
+            else
+            {
+                var erros = validation.Errors.Select(e => e.ErrorMessage);
+                erro.MakeErrorString(erros);
+            }
+            return true;
         }
 
         public void Delete(string name)
@@ -26,39 +48,53 @@ namespace API_Exemplo.Services
 
         public void Put(T objeto)
         {
-            if (objeto == null)
+            TratamentoExcessao erro = new TratamentoExcessao();
+
+            var validation = new AlunoInfantilValidacao(BancoDeDados.alunosInfantil).Validate(objeto);
+
+            if (validation.IsValid)
             {
-                throw new Exception("O tipo não pode ser nulo!");
+                AlunoInfantil aluno = objeto;
+
+                var put = BancoDeDados.alunosInfantil.Find(a => a.nome == aluno.nome);
+
+                put.ano = aluno.ano;
+                put.turno = aluno.turno;
+                put.idade = aluno.idade;
             }
-
-            AlunoInfantil aluno = objeto;
-
-            var put = BancoDeDados.alunosInfantil.Find(a => a.nome == aluno.nome);
-
-            if (put == null)
+            else
             {
-                throw new Exception("Não existe aluno com esse nome!");
+                var erros = validation.Errors.Select(e => e.ErrorMessage);
+                erro.MakeErrorString(erros);
             }
-
-            put.ano = aluno.ano;
-            put.turno = aluno.turno;
-            put.idade = aluno.idade;
         }
 
         public void Patch(T tipoAluno, string atributo)
         {
-            var patch = BancoDeDados.alunosInfantil.FirstOrDefault(a => a.nome == tipoAluno.nome);
-            if (atributo == "ano")
+            TratamentoExcessao erro = new TratamentoExcessao();
+
+            var validation = new AlunoInfantilValidacao(BancoDeDados.alunosInfantil , atributo).Validate(tipoAluno);
+            if (validation.IsValid)
             {
-                patch.ano = tipoAluno.ano;
+                var patch = BancoDeDados.alunosInfantil.FirstOrDefault(a => a.nome == tipoAluno.nome);
+
+                switch (atributo)
+                {
+                    case "ano":
+                        patch.ano = tipoAluno.ano;
+                        break;
+                    case "turno":
+                        patch.turno = tipoAluno.turno;
+                        break;
+                    case "idade":
+                        patch.idade = tipoAluno.idade;
+                        break;
+                }
             }
-            else if (atributo == "turno")
+            else
             {
-                patch.turno = tipoAluno.turno;
-            }
-            else if (atributo == "idade")
-            {
-                patch.idade = tipoAluno.idade;
+                var erros = validation.Errors.Select(e => e.ErrorMessage);
+                erro.MakeErrorString(erros);
             }
         }
 

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Ege1pxn3XtbhBYsRad6beqwf3qv3ud5mE9+oW6vPCJF85gANoFI9m4AQ37ST6CFsoWuBWUx0T6BU/yGoPVUVTQ==",
+  "dgSpecHash": "XjcdA//ftxELe1N1XSa44/aQf674rHDV/bHK5yf6I9GLwWoOTxKRzZDzT0tfSt5hQL8qrqIdf61GZZkLo9W/7A==",
   "success": true,
   "projectFilePath": "C:\\Users\\dtiDigital\\Documents\\TREINAMENTO\\API-Exemplo\\API-Exemplo\\API-Exemplo.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\dtiDigital\\.nuget\\packages\\fluentvalidation\\11.8.0\\fluentvalidation.11.8.0.nupkg.sha512",
     "C:\\Users\\dtiDigital\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\dtiDigital\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\dtiDigital\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",

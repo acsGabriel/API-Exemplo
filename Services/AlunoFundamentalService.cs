@@ -1,63 +1,99 @@
-﻿using API_Exemplo.Interfaces.Services;
-
+﻿using API_Exemplo.Exceções;
+using API_Exemplo.Interfaces.Services;
+using API_Exemplo.Validacoes;
+using FluentValidation;
 
 namespace API_Exemplo.Services
 {
     public class AlunoFundamentalService<T> : IAlunoFundamentalService<T>
         where T : AlunoFundamental
     {
-        public AlunoFundamentalService() { }
+        //public IValidator<AlunoFundamental> _alunoFundamentalValidator;
+        public AlunoFundamentalService() 
+        {
+            //_alunoFundamentalValidator = validator;
+        }
 
         public List<T> Get() 
         {
             return BancoDeDados.alunosFundamental.OrderBy(a => a.nome).Cast<T>().ToList();
         }
 
-        public void Post(T tipoAluno) 
+        public bool Post(T novoAluno) 
         {
-            BancoDeDados.alunosFundamental.Add(tipoAluno);
-        }
+            var validacao = new AlunoFundamentalValidacao();
+            var erro = new TratamentoExcessao();
 
-        public void Delete(string name)
-        {
-            BancoDeDados.alunosFundamental.Remove(BancoDeDados.alunosFundamental.FirstOrDefault(a => a.nome == name));
-        }
+            var validation = validacao.Validate(novoAluno);
 
-        public void Put(T objeto) 
-        {
-            if(objeto == null)
+            if (validation.IsValid)
             {
-                throw new Exception("O tipo não pode ser nulo!");
+                BancoDeDados.alunosFundamental.Add(novoAluno);
+            }
+            else
+            {
+                var erros = validation.Errors.Select(e => e.ErrorMessage);
+                erro.MakeErrorString(erros);
             }
 
-            AlunoFundamental aluno = objeto;
+            return true;
+        }
 
-            var put = BancoDeDados.alunosFundamental.Find(a => a.nome == aluno.nome);
+        public void Delete(string nome)
+        {
+            BancoDeDados.alunosFundamental.Remove(BancoDeDados.alunosFundamental.FirstOrDefault(a => a.nome == nome));
+        }
 
-            if (put == null)
+        public void Put(T alunoAtualizado) 
+        {
+            TratamentoExcessao erro = new TratamentoExcessao();
+
+            var validation = new AlunoFundamentalValidacao(BancoDeDados.alunosFundamental).Validate(alunoAtualizado);
+
+            if (validation.IsValid)
             {
-                throw new Exception("Não existe aluno com esse nome!");
-            }
+                AlunoFundamental aluno = alunoAtualizado;
 
-            put.ano = aluno.ano;
-            put.turno = aluno.turno;
-            put.idade = aluno.idade;
+                var put = BancoDeDados.alunosFundamental.Find(a => a.nome == aluno.nome);
+
+                put.ano = aluno.ano;
+                put.turno = aluno.turno;
+                put.idade = aluno.idade;
+            }
+            else
+            {
+                var erros = validation.Errors.Select(e => e.ErrorMessage);
+                erro.MakeErrorString(erros);
+            }
         }
 
         public void Patch(T tipoAluno, string atributo)
         {
-            var patch = BancoDeDados.alunosFundamental.FirstOrDefault(a => a.nome == tipoAluno.nome);
-            if (atributo == "ano")
+            TratamentoExcessao erro = new TratamentoExcessao();
+
+            var validation = new AlunoFundamentalValidacao(BancoDeDados.alunosFundamental, atributo).Validate(tipoAluno);
+
+            if (validation.IsValid)
             {
-                patch.ano = tipoAluno.ano;
+                var patch = BancoDeDados.alunosFundamental.FirstOrDefault(a => a.nome == tipoAluno.nome);
+
+                switch (atributo)
+                {
+                    case "ano":
+                        patch.ano = tipoAluno.ano;
+                        break;
+                    case "turno":
+                        patch.turno = tipoAluno.turno;
+                        break;
+                    case "idade":
+                        patch.idade = tipoAluno.idade;
+                        break;
+                }
             }
-            else if (atributo == "turno")
+            else
             {
-                patch.turno = tipoAluno.turno;
-            }
-            else if(atributo == "idade")
-            {
-                patch.idade = tipoAluno.idade;
+                var erros = validation.Errors.Select(e => e.ErrorMessage);
+                erro.MakeErrorString(erros);
             }
         }
 

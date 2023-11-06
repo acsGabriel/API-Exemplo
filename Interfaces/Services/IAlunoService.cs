@@ -3,7 +3,7 @@
     public interface IAlunoService<T>
     {
         public List<T> Get();
-        public void Post(T tipoAluno);
+        public bool Post(T tipoAluno);
         public void Delete(string name);
         public void Put(T tipoAluno); //Generico
         public void Patch(T tipoAluno, string atributo);

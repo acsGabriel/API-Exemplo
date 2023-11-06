@@ -1,6 +1,8 @@
 using API_Exemplo;
 using API_Exemplo.Interfaces.Services;
 using API_Exemplo.Services;
+using API_Exemplo.Validacoes;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,10 +13,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Injeção de Dependência
+//Injeção de Dependência - Serviços
 builder.Services.AddScoped<IAlunoSuperiorService<AlunoSuperior> , AlunoSuperiorService <AlunoSuperior> >();
 builder.Services.AddScoped<IAlunoFundamentalService<AlunoFundamental>, AlunoFundamentalService<AlunoFundamental> >();
 builder.Services.AddScoped<IAlunoInfantilService<AlunoInfantil>, AlunoInfantilService<AlunoInfantil> >();
+
+//Injeção de Dependência - Validações
+builder.Services.AddScoped<IValidator<AlunoInfantil>, AlunoInfantilValidacao>();
+builder.Services.AddScoped<IValidator<AlunoFundamental>, AlunoFundamentalValidacao>();
+builder.Services.AddScoped<IValidator<AlunoSuperior>, AlunoSuperiorValidacao>();
 
 var app = builder.Build();
 
