@@ -1,4 +1,5 @@
 ﻿using API_Exemplo.Exceções;
+using API_Exemplo.Interfaces.Bancos;
 using API_Exemplo.Interfaces.Services;
 using API_Exemplo.Validacoes;
 using FluentValidation;
@@ -13,25 +14,27 @@ namespace API_Exemplo.Services
     public class AlunoInfantilService<T> : IAlunoInfantilService<T>
         where T : AlunoInfantil
     {
-        public IValidator<AlunoInfantil> _alunoInfantilValidator;
-        public AlunoInfantilService(IValidator<AlunoInfantil> alunoInfantilValidator) 
+        //INJEÇÃO DE DEPENDÊNCIAS
+        public IBancoDeDados _bancoDeDados;
+        public AlunoInfantilService(IBancoDeDados bancodedados) 
         {
-            _alunoInfantilValidator = alunoInfantilValidator;
+            _bancoDeDados = bancodedados;
         }
 
-        public List<T> Get()
+        //METODOS 
+        public List<T> Get() //Mostra todos os alunos
         {
-            return BancoDeDados.alunosInfantil.OrderBy(a => a.nome).Cast<T>().ToList();
+            return _bancoDeDados.GetAlunoInfantil().OrderBy(a => a.nome).Cast<T>().ToList();
         }
 
-        public bool Post(T aluno) 
+        public bool Post(T novoAluno) //Adiciona novo aluno
         {
-            TratamentoExcessao erro = new TratamentoExcessao();
-            var validation = _alunoInfantilValidator.Validate(aluno);
+            TratamentoExcessao erro = new TratamentoExcessao(); //Instância para tratamento de excessões
+            var validation = new AlunoInfantilValidacao().Validate(novoAluno); //Validação do objeto
 
             if(validation.IsValid) 
             {
-                BancoDeDados.alunosInfantil.Add(aluno);
+                _bancoDeDados.AddAlunoInfantil(novoAluno);
             }
             else
             {
@@ -41,76 +44,58 @@ namespace API_Exemplo.Services
             return true;
         }
 
-        public void Delete(string name)
+        public void Delete(string nome) //Remove um aluno 
         {
-            BancoDeDados.alunosInfantil.Remove(BancoDeDados.alunosInfantil.FirstOrDefault(a => a.nome == name));
+            _bancoDeDados.DeleteAlunoInfantil(_bancoDeDados.GetAlunoInfantil().FirstOrDefault(a => a.nome == nome));
         }
 
-        public void Put(T objeto)
+        public bool Put(T alunoAtualizado) //Atualiza todos os dados de um aluno
         {
             TratamentoExcessao erro = new TratamentoExcessao();
-
-            var validation = new AlunoInfantilValidacao(BancoDeDados.alunosInfantil).Validate(objeto);
+            var validation = new AlunoInfantilValidacao(_bancoDeDados.GetAlunoInfantil()).Validate(alunoAtualizado);
 
             if (validation.IsValid)
             {
-                AlunoInfantil aluno = objeto;
-
-                var put = BancoDeDados.alunosInfantil.Find(a => a.nome == aluno.nome);
-
-                put.ano = aluno.ano;
-                put.turno = aluno.turno;
-                put.idade = aluno.idade;
+                _bancoDeDados.PutAlunoInfantil((AlunoInfantil)alunoAtualizado);
             }
             else
             {
                 var erros = validation.Errors.Select(e => e.ErrorMessage);
                 erro.MakeErrorString(erros);
             }
+            return true;
         }
 
-        public void Patch(T tipoAluno, string atributo)
+        public bool Patch(T alunoAlterado, string atributo) //Altera um ou mais dados do aluno
         {
             TratamentoExcessao erro = new TratamentoExcessao();
+            var validation = new AlunoInfantilValidacao(_bancoDeDados.GetAlunoInfantil() , atributo).Validate(alunoAlterado);
 
-            var validation = new AlunoInfantilValidacao(BancoDeDados.alunosInfantil , atributo).Validate(tipoAluno);
             if (validation.IsValid)
             {
-                var patch = BancoDeDados.alunosInfantil.FirstOrDefault(a => a.nome == tipoAluno.nome);
-
-                switch (atributo)
-                {
-                    case "ano":
-                        patch.ano = tipoAluno.ano;
-                        break;
-                    case "turno":
-                        patch.turno = tipoAluno.turno;
-                        break;
-                    case "idade":
-                        patch.idade = tipoAluno.idade;
-                        break;
-                }
+                _bancoDeDados.PatchAlunoInfantil((AlunoInfantil)alunoAlterado , atributo);
             }
             else
             {
                 var erros = validation.Errors.Select(e => e.ErrorMessage);
                 erro.MakeErrorString(erros);
             }
+            return true;
         }
 
-        public List<T> GetSelectedAlunos(int ano)
+        public List<T> GetSelectedAlunos(int ano) //Mostra os alunos do mesmo ano
         {
-            return BancoDeDados.alunosInfantil.Where(a => ano.Equals(a.ano)).OrderBy(a => a.nome).Cast<T>().ToList();
+            return _bancoDeDados.GetAlunoInfantil().Where(a => ano.Equals(a.ano)).OrderBy(a => a.nome).Cast<T>().ToList();
         }
 
-        public List<string> Names()
+        public List<string> Names() //Mostra o nome de todos os alunos
         {
-            return BancoDeDados.alunosInfantil.Select(a => a.nome).OrderBy(a => a).ToList();
+            return _bancoDeDados.GetAlunoInfantil().Select(a => a.nome).OrderBy(a => a).ToList();
         }
 
-        public T FirstStudentByAno(int ano)
+        public T FirstStudentByAno(int ano) //Mostra o primeiro aluno do ano
         {
-            var alunoEncontrado = BancoDeDados.alunosInfantil.FirstOrDefault(a => ano.Equals(a.ano));
+            var alunoEncontrado = _bancoDeDados.GetAlunoInfantil().FirstOrDefault(a => ano.Equals(a.ano));
 
             if (alunoEncontrado is T alunoConvertido)
             {

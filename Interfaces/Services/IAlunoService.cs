@@ -2,11 +2,12 @@
 {
     public interface IAlunoService<T>
     {
+        //METODOS 
         public List<T> Get();
-        public bool Post(T tipoAluno);
-        public void Delete(string name);
-        public void Put(T tipoAluno); //Generico
-        public void Patch(T tipoAluno, string atributo);
+        public bool Post(T aluno);
+        public void Delete(string nome);
+        public bool Put(T aluno); 
+        public bool Patch(T aluno, string atributo);
         public List<string> Names();
         
 

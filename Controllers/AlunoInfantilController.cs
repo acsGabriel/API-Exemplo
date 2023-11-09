@@ -8,6 +8,7 @@ namespace API_Exemplo.Controllers
     [Route("[Controller]")] //FAZ A CONEXÃO COM O SERVIDOR WEB
     public class AlunoInfantilController : ControllerBase
     {
+        //INJEÇÃO DE DEPENDÊNCIAS
         private readonly ILogger<AlunoInfantilController> _logger;
 
         private readonly IAlunoInfantilService<AlunoInfantil> _alunoInfantilService;
@@ -18,6 +19,7 @@ namespace API_Exemplo.Controllers
             _alunoInfantilService = alunoInfantilService;
         }
 
+        //MÉTODOS
         [HttpGet("GetAlunosInfantil")]
         public List<AlunoInfantil> Get()
         {
@@ -30,6 +32,12 @@ namespace API_Exemplo.Controllers
             _alunoInfantilService.Post(aluno);
         }
 
+        [HttpDelete("DeleteAlunoInfantil")]
+        public void Delete(string nome)
+        {
+            _alunoInfantilService.Delete(nome);
+        }
+
         [HttpPut("PutAlunoInfantil")]
         public void Put(AlunoInfantil aluno)
         {
@@ -40,12 +48,6 @@ namespace API_Exemplo.Controllers
         public void Patch(AlunoInfantil aluno, string atributo)
         {
             _alunoInfantilService.Patch(aluno, atributo);
-        }
-
-        [HttpDelete("DeleteAlunoInfantil")]
-        public void Delete(string nome)
-        {
-            _alunoInfantilService.Delete(nome);
         }
 
         [HttpGet]

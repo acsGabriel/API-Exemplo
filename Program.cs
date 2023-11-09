@@ -1,4 +1,5 @@
 using API_Exemplo;
+using API_Exemplo.Interfaces.Bancos;
 using API_Exemplo.Interfaces.Services;
 using API_Exemplo.Services;
 using API_Exemplo.Validacoes;
@@ -17,6 +18,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAlunoSuperiorService<AlunoSuperior> , AlunoSuperiorService <AlunoSuperior> >();
 builder.Services.AddScoped<IAlunoFundamentalService<AlunoFundamental>, AlunoFundamentalService<AlunoFundamental> >();
 builder.Services.AddScoped<IAlunoInfantilService<AlunoInfantil>, AlunoInfantilService<AlunoInfantil> >();
+
+//Injeção de Dependência - Banco De Dados
+builder.Services.AddScoped<IBancoDeDados, BancoDeDados>();
 
 //Injeção de Dependência - Validações
 builder.Services.AddScoped<IValidator<AlunoInfantil>, AlunoInfantilValidacao>();

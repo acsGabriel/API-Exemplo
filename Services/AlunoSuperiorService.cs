@@ -1,4 +1,5 @@
 ﻿using API_Exemplo.Exceções;
+using API_Exemplo.Interfaces.Bancos;
 using API_Exemplo.Interfaces.Services;
 using API_Exemplo.Validacoes;
 using FluentValidation;
@@ -12,26 +13,27 @@ namespace API_Exemplo.Services
     public class AlunoSuperiorService<T> : IAlunoSuperiorService<T>
         where T : AlunoSuperior
     {
-        public IValidator<AlunoSuperior> _alunoSuperiorValidator;
-        public AlunoSuperiorService(IValidator<AlunoSuperior> validator)
+        //INJEÇÃO DE DEPENDÊNCIAS
+        public IBancoDeDados _bancoDeDados;
+        public AlunoSuperiorService(IBancoDeDados bancodedados)
         {
-            _alunoSuperiorValidator = validator;
+            _bancoDeDados = bancodedados;
         }
 
-        public List<T> Get()
+        //METODOS
+        public List<T> Get() //Retorna todos os alunos
         {
-            return BancoDeDados.alunosSuperior.OrderBy(a => a.nome).Cast<T>().ToList();
+            return _bancoDeDados.GetAlunoSuperior().OrderBy(a => a.nome).Cast<T>().ToList();
         }
 
-        public bool Post(T aluno)
+        public bool Post(T novoAluno) //Adiciona novo aluno
         {
             TratamentoExcessao erro = new TratamentoExcessao();
-
-            var validation = _alunoSuperiorValidator.Validate(aluno);
+            var validation = new AlunoSuperiorValidacao().Validate(novoAluno);
 
             if (validation.IsValid)
             {
-                BancoDeDados.alunosSuperior.Add(aluno);
+                _bancoDeDados.AddAlunoSuperior(novoAluno);
             }
             else
             {
@@ -41,78 +43,58 @@ namespace API_Exemplo.Services
             return true;
         }
 
-        public void Put(T aluno)
+        public void Delete(string nome) //Remove um aluno
+        {
+            _bancoDeDados.DeleteAlunoSuperior(_bancoDeDados.GetAlunoSuperior().FirstOrDefault(a => a.nome == nome));
+        }
+
+        public bool Put(T alunoAtualizado) //Atualiza todos os dados de um aluno
         {
             TratamentoExcessao erro = new TratamentoExcessao();
-
-            var validation = new AlunoSuperiorValidacao(BancoDeDados.alunosSuperior).Validate(aluno);
+            var validation = new AlunoSuperiorValidacao(_bancoDeDados.GetAlunoSuperior()).Validate(alunoAtualizado);
 
             if (validation.IsValid)
             {
-                var put = BancoDeDados.alunosSuperior.Find(a => a.nome == aluno.nome);
-
-                put.turno = aluno.turno;
-                put.ano = aluno.ano;
-                put.idade = aluno.idade;
-                put.curso = aluno.curso;
+                _bancoDeDados.PutAlunoSuperior((AlunoSuperior)alunoAtualizado);
             }
             else
             {
                 var erros = validation.Errors.Select(e => e.ErrorMessage);
                 erro.MakeErrorString(erros);
             }
+            return true;
         }
 
-        public void Delete(string name)
-        {
-            BancoDeDados.alunosSuperior.Remove(BancoDeDados.alunosSuperior.FirstOrDefault(a => a.nome == name));
-        }
-
-        public void Patch(T aluno, string atributo)
+        public bool Patch(T alunoAlterado , string atributo) //Altera um atributo do aluno
         {
             TratamentoExcessao erro = new TratamentoExcessao();
-
-            var validation = new AlunoSuperiorValidacao(BancoDeDados.alunosSuperior, atributo).Validate(aluno);
+            var validation = new AlunoSuperiorValidacao(_bancoDeDados.GetAlunoSuperior() , atributo).Validate(alunoAlterado);
+            
             if (validation.IsValid)
             {
-                var patch = BancoDeDados.alunosSuperior.FirstOrDefault(a => a.nome == aluno.nome);
-                switch (atributo)
-                {
-                    case "ano":
-                        patch.ano = aluno.ano;
-                        break;
-                    case "turno":
-                        patch.turno = aluno.turno;
-                        break;
-                    case "idade":
-                        patch.idade = aluno.idade;
-                        break;
-                }
+                _bancoDeDados.PatchAlunoSuperior((AlunoSuperior)alunoAlterado , atributo);
             }
             else
             {
                 var erros = validation.Errors.Select(e => e.ErrorMessage);
                 erro.MakeErrorString(erros);
             }
+            return true;
         }
 
-        public List<T> GetSelectedAlunos(string curso)
+        public List<T> GetSelectedAlunos(string curso) //Mostra todos os alunos do mesmo curso
         {
-            return BancoDeDados.alunosSuperior.Where(a => curso == a.curso).OrderBy(a => a.nome).Cast<T>().ToList();
+            return _bancoDeDados.GetAlunoSuperior().Where(a => curso == a.curso).OrderBy(a => a.nome).Cast<T>().ToList();
         }
 
-        public List<T> Graduate(string curso1, string curso2)
+        public List<string> Names() //Mostra o nome de todos os alunos
         {
-            List<AlunoSuperior> grad1 = BancoDeDados.alunosSuperior.Where(aluno => aluno.curso == curso1 && aluno.ano > 3).ToList();
-            return BancoDeDados.alunosSuperior.Where(aluno => aluno.curso == curso2 && aluno.ano > 3).Concat(grad1).OrderBy(aluno => aluno.nome).Cast<T>().ToList();
+            return _bancoDeDados.GetAlunoSuperior().Select(a => a.nome).OrderBy(a => a).ToList();
         }
-        public List<string> Names()
+
+        public T FirstStudentByCurso(string curso) //Mostra o primeiro aluno do curso
         {
-            return BancoDeDados.alunosSuperior.Select(a => a.nome).OrderBy(a => a).ToList();
-        }
-        public T FirstStudentByCurso(string curso)
-        {
-            var alunoEncontrado = BancoDeDados.alunosSuperior.FirstOrDefault(a => curso.Equals(a.curso));
+            var alunoEncontrado = _bancoDeDados.GetAlunoSuperior().FirstOrDefault(a => curso.Equals(a.curso));
 
             if (alunoEncontrado is T alunoConvertido)
             {
@@ -123,5 +105,12 @@ namespace API_Exemplo.Services
                 throw new Exception("Não existem alunos nesse ano!");
             }
         }
+
+        public List<T> Graduate(string curso1, string curso2) //Mostra os alunos que estao formando entre dois cursos
+        {
+            List<AlunoSuperior> grad1 = _bancoDeDados.GetAlunoSuperior().Where(aluno => aluno.curso == curso1 && aluno.ano > 3).ToList();
+            return _bancoDeDados.GetAlunoSuperior().Where(aluno => aluno.curso == curso2 && aluno.ano > 3).Concat(grad1).OrderBy(aluno => aluno.nome).Cast<T>().ToList();
+        }
+
     }
 }

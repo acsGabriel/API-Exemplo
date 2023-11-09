@@ -8,6 +8,7 @@ namespace API_Exemplo.Controllers
     [Route("[Controller]")] //FAZ A CONEXÃO COM O SERVIDOR WEB
     public class AlunoSuperiorController : ControllerBase
     {
+        //INJEÇÃO DE DEPENDÊNCIAS
         private readonly ILogger<AlunoSuperiorController> _logger;
 
         private readonly IAlunoSuperiorService<AlunoSuperior> _alunoSuperiorService;
@@ -19,45 +20,38 @@ namespace API_Exemplo.Controllers
 
         }
 
-        [HttpGet(Name = "GetAlunosSuperior")] //FAZ A REQUISIÇÃO HTTP PARA MOSTRAR OS ALUNOS
+        //METODOS
+        [HttpGet(Name = "GetAlunosSuperior")] 
         public List<AlunoSuperior> Get()
         {
-            return _alunoSuperiorService.Get(); //Mostra a lista estatica com as strings que foram criadas a partir dos atributos de um objeto
+            return _alunoSuperiorService.Get(); 
         }
 
-        [HttpPost(Name = "PostAlunosSuperior")] //ADICIONA UM NOVO ALUNO
-        public bool Post([FromBody] AlunoSuperior aluno)
+        [HttpPost(Name = "PostAlunosSuperior")] 
+        public void Post(AlunoSuperior aluno)
         {
-            //Colocar no serviço
-            _alunoSuperiorService.Post(aluno); //Adiciona o aluno à lista de alunos
-            return true;
+            _alunoSuperiorService.Post(aluno); 
         }
 
-
-        [HttpPut(Name = "PutAlunosSuperior")] //ATUALIZA TODOS OS DADOS DE UM ALUNO 
-        public bool Put([FromBody] AlunoSuperior aluno)
-        {
-            _alunoSuperiorService.Put(aluno);
-            return true;
-        }
-
-        [HttpDelete(Name = "DeleteAlunosSuperior")] //REMOVE UM ALUNO
-        public bool Delete([FromBody] string nome)
+        [HttpDelete(Name = "DeleteAlunosSuperior")]
+        public void Delete(string nome)
         {
             _alunoSuperiorService.Delete(nome);
-            return true;
         }
 
+        [HttpPut(Name = "PutAlunosSuperior")]  
+        public void Put(AlunoSuperior aluno)
+        {
+            _alunoSuperiorService.Put(aluno);
+        }
 
-        [HttpPatch(Name = "PatchAlunosSuperior")] //ATUALIZA UM DADO DO ALUNO
-        public bool Patch([FromBody] AlunoSuperior aluno, string atributo)
+        [HttpPatch(Name = "PatchAlunosSuperior")] 
+        public void Patch(AlunoSuperior aluno, string atributo)
         {
             _alunoSuperiorService.Patch(aluno, atributo);
-            return true;
         }
 
-
-        [HttpGet] //MOSTRA ALUNOS DE UM CURSO ESPECIFICO
+        [HttpGet] 
         [Route("GetSelectedAlunosSuperior")]
         public List<AlunoSuperior> GetSelectedAlunos(string curso)
         {
@@ -65,26 +59,24 @@ namespace API_Exemplo.Controllers
         }
 
         [HttpGet]
-        [Route("Graduation")] //MOSTRA OS ALUNOS QUE ESTAO PARA SE GRADUAR DE 2 CURSOS SIMULTANEAMENTE
-        public List<AlunoSuperior> GetGraduatingStudents(string curso1, string curso2)
-        {
-            return _alunoSuperiorService.Graduate(curso1, curso2);
-        }
-
-        [HttpGet]
-        [Route("Names")] //MOSTRA O NOME DE TODOS OS ALUNOS
-        public List<string> StudentNames()
+        [Route("Names")] 
+        public List<string> Names()
         {
             return _alunoSuperiorService.Names();
         }
 
         [HttpGet]
-        [Route("FirstOfClass")] //MOSTRA O PRIMEIRO ALUNO DO CURSO PASSADO COMO PARÂMETRO
-        public AlunoSuperior MostFullGraduation(string course)
+        [Route("FirstOfClass")] 
+        public AlunoSuperior FirstStudent(string curso)
         {
-            return _alunoSuperiorService.FirstStudentByCurso(course);
+            return _alunoSuperiorService.FirstStudentByCurso(curso);
         }
 
-
+        [HttpGet]
+        [Route("Graduation")] 
+        public List<AlunoSuperior> Graduation(string curso1, string curso2)
+        {
+            return _alunoSuperiorService.Graduate(curso1, curso2);
+        }
     }
 }
